@@ -1,5 +1,6 @@
 // src/contexts/AuthContext.js
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { API_BASE_URL } from '@/config/api';
 import { useRouter } from 'next/router';
 
 const AuthContext = createContext();
@@ -154,7 +155,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AUTH_ACTIONS.LOGIN_START });
 
     try {
-      const response = await fetch('http://192.168.1.13:4000/api/auth/login', {
+      const response = await fetch('${API_BASE_URL}/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -191,7 +192,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AUTH_ACTIONS.LOGIN_START });
 
     try {
-      const response = await fetch('http://192.168.1.13:4000/api/auth/signup', {
+      const response = await fetch('${API_BASE_URL}/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -265,7 +266,7 @@ export const AuthProvider = ({ children }) => {
   // Make authenticated API requests - FIXED VERSION
   const authenticatedFetch = async (url, options = {}) => {
     // If URL doesn't start with http, prepend backend URL
-    const fullUrl = url.startsWith('http') ? url : `http://192.168.1.13:4000${url}`;
+    const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
     
     const headers = {
       ...getAuthHeaders(),

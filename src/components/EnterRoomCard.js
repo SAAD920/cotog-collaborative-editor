@@ -1,5 +1,6 @@
 // src/components/EnterRoomCard.js
 import React, { useState } from 'react';
+import { API_BASE_URL } from '@/config/api';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -47,7 +48,7 @@ const EnterRoomCard = () => {
 
   const checkRoomExists = async (roomId) => {
     try {
-      const response = await fetch(`http://192.168.1.13:4000/api/room/${roomId}`);
+      const response = await fetch(`${API_BASE_URL}/api/room/${roomId}`);
       
       if (response.ok) {
         const roomData = await response.json();

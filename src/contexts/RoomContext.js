@@ -1,6 +1,7 @@
 // src/contexts/RoomContext.js - ENHANCED WITH AUDIO PERMISSION SYSTEM
 import React, { createContext, useContext, useReducer, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { SOCKET_URL } from '@/config/api';
 import { useAuth } from '@/contexts/AuthContext';
 import io from 'socket.io-client';
 
@@ -469,7 +470,7 @@ export const RoomProvider = ({ children }) => {
       console.log('🔐 [CLIENT] Creating socket connection with token');
 
       // Create new socket connection
-      const socket = io('http://192.168.1.13:4000', {
+      const socket = io(SOCKET_URL, {
         auth: { token },
         autoConnect: false,
         forceNew: true,
